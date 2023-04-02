@@ -1,53 +1,32 @@
 import React from "react";
 
-class MovieList extends React.Component {
-    render() {
-        return (
-            <div className="row">
-                <div className="col-lg-4">
-                    <div className="card mb-4 shadow-sm">
-                        <img src="https://image.tmdb.org/t/p/w500/lyQBXzOQSuE59IsHyhrp0qIiPAz.jpg" className="card-img-top" alt="..." />
-                        <div className="card-body">
-                            <h5 className="card-title">The Shawshank Redemption</h5>
-                            <p className="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            <div className="d-flex justify-content-between align-items-center">
-                                <button type="button" className="btn btn-md btn-outline-danger">Delete</button>
-                                <h2><span className="badge badge-info">9.1</span></h2>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="col-lg-4">
-                    <div className="card">
-                        <img src="https://image.tmdb.org/t/p/w500/rPdtLWNsZmAtoZl9PK7S2wE3qiS.jpg" className="card-img-top" alt="..." />
-                        <div className="card-body">
-                            <h5 className="card-title">The Godfather</h5>
-                            <p className="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            <div className="d-flex justify-content-between align-items-center">
-                                <button type="button" className="btn btn-sm btn-outline-primary">View</button>
-                                <button type="button" className="btn btn-sm btn-outline-danger">Edit</button>
-                                <h2><span className="badge badge-info">9.2</span></h2>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="col-lg-4">
-                    <div className="card">
-                        <img src="https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg" className="card-img-top" alt="..." />
-                        <div className="card-body">
-                            <h5 className="card-title">The Dark Knight</h5>
-                            <p className="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            <div className="d-flex justify-content-between align-items-center">
-                                <button type="button" className="btn btn-sm btn-outline-primary">View</button>
-                                <button type="button" className="btn btn-sm btn-outline-danger">Edit</button>
-                                <h2><span className="badge badge-info">9.2</span></h2>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        );
-    }
-}
+const MovieList = (props) => { // Burada props olarak moviesleri alıyoruz.
 
+    //this problemiyle karşılaşmamak için ayrı bir fonksiyon oluşturduk.
+    /* function handleClick() {
+        console.log("clicked");
+    }; */
+    //ama bunun yerine aşağıda onclick eventi içinde direkt olarak arrow function kullanarak yapabiliriz. Ayrı bir event handler oluşturmadan.
+    return (
+        <div className="row">
+
+            {props.movies.map(movie => (      // Burada moviesleri map ediyoruz ve her bir movie için bir card oluşturuyoruz.
+
+                <div className="col-lg-4" key={movie.id}>
+                    <div className="card mb-4 shadow-sm">
+                        <img src={movie.image} className="card-img-top" alt="..." />
+                        <div className="card-body">
+                            <h5 className="card-title">{movie.name}</h5>
+                            <p className="card-text">{movie.overview}</p>
+                            <div className="d-flex justify-content-between align-items-center">
+                                <button type="button" onClick={(event) => props.deleteMovieProp(movie)} className="btn btn-md btn-outline-danger">Delete</button>
+                                <h2><span className="badge bg-info">{movie.rating}</span></h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            ))}
+        </div>
+    );
+}
 export default MovieList;
