@@ -5,32 +5,21 @@ import MovieList from './movieList';
 class App extends React.Component {
 
     state = {
-        movies: [
-            {
-                "id": 1,
-                "name": "The Shawshank Redemption",
-                "rating": 9.2,
-                "overview": "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
-                "image": "https://image.tmdb.org/t/p/w500/lyQBXzOQSuE59IsHyhrp0qIiPAz.jpg"
-            },
-            {
-                "id": 2,
-                "name": "The Godfather",
-                "rating": 9.1,
-                "overview": "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
-                "image": "https://image.tmdb.org/t/p/w500/rPdtLWNsZmAtoZl9PK7S2wE3qiS.jpg"
-            },
-            {
-                "id": 3,
-                "name": "The Dark Knight",
-                "rating": 8.9,
-                "overview": "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
-                "image": "https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg"
-            }
-        ],
+        movies: [],
         searchQuery: ""
     }
 
+    /* async componentDidMount() {
+        const baseURL = "http://localhost:3002/movies"; // Burada api'ye istek atacağımız url'i tanımlıyoruz.
+        const response = await fetch(baseURL); // Burada fetch ile api'ye istek atıyoruz. fetch asnc olarak bize network request döndürür.
+        console.log(response);
+        const data = await response.json(); // Burada response'u json formatına çeviriyoruz.
+        console.log(data);
+        this.setState({movies: data}) // Burada movies state'ini güncelliyoruz.
+    } */
+
+    async componentDidMount() {
+    }
 
     deleteMovie = (movie) => { // Burada movie parametresi ile seçilen movie'yi alıyoruz.
         const newMovieList = this.state.movies.filter( // Burada movies array'ini filtreliyoruz ve seçilen movie'yi çıkartıyoruz.
@@ -52,8 +41,8 @@ class App extends React.Component {
         })
     }   
     
-        render() {
-
+        render() {  //Yalnızca içeriğin gösterilmesi için kullanılmasını istiyoruz
+ 
             let filteredMovies = this.state.movies.filter( // Burada movies array'ini filtreliyoruz.
                 (movie) => { // Burada movies array'ini map ediyoruz.
                     return movie.name.toLowerCase().indexOf(this.state.searchQuery.toLowerCase()) !== -1; // Burada inputtan gelen değeri movies array'inde arıyoruz.

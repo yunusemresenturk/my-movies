@@ -1,0 +1,46 @@
+{
+"movies": [
+    {
+        "id": 1,
+        "name": "The Fast and the Furious",
+        "rating": 5,
+        "overview": "Los Angeles police officer Brian O'Conner must decide where his loyalty really lies when he becomes enamored with the street racing world he has been sent undercover to destroy.",
+        "image": "https://image.tmdb.org/t/p/w500/2lECpi35Hnbpa4y46JX0aY3AWTy.jpg"
+    },
+    {
+        "id": 2,
+        "name": "The Fast and the Furious: Tokyo Drift",
+        "rating": 3,
+        "overview": "Tokyo drift is the third installment of the Fast and the Furious franchise. It is the first film in the series to be set outside of the United States. The film was released on June 16, 2006.",
+        "image": "https://image.tmdb.org/t/p/w500/g5pxxYlRJU7bG6ijgDbewXonmSY.jpg"
+    },
+    {
+        "id": 3,
+        "name": "The Flash",
+        "rating": 8,
+        "overview": "After being struck by lightning, Barry Allen wakes up from his coma to discover he's been given the power of super speed, becoming the next Flash, fighting crime in Central City.",
+        "image": "https://image.tmdb.org/t/p/w500/wHa6KOJAoNTFLFtp7wguUJKSnju.jpg"
+    },
+    {
+        "id": 4,
+        "name": "Rogue One: A Star Wars Story",
+        "rating": 9,
+        "overview": "The daughter of an Imperial scientist joins the Rebel Alliance in a risky move to steal the Death Star plans.",
+        "image": "https://image.tmdb.org/t/p/w500/i0yw1mFbB7sNGHCs7EXZPzFkdA1.jpg"
+    },
+    {
+        "id": 5,
+        "name": "Project Power",
+        "rating": 7,
+        "overview": "A pill that gives its users unpredictable superpowers for five minutes hits the streets of New Orleans.",
+        "image": "https://image.tmdb.org/t/p/w500/TnOeov4w0sTtV2gqICqIxVi74V.jpg"
+    },
+    {
+        "id": 6,
+        "name": "The Old Guard",
+        "rating": 6,
+        "overview": "Four undying warriors who've secretly protected humanity for centuries become targeted for their mysterious powers just as they discover a new immortal.",
+        "image": "https://image.tmdb.org/t/p/w500/cjr4NWURcVN3gW5FlHeabgBHLrY.jpg"
+    }
+]
+}
