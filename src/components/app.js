@@ -2,6 +2,9 @@ import React from 'react';
 import SearchBar from './searchBar';
 import MovieList from './movieList';
 import axios from 'axios';
+import AddMovie from './addMovie';
+import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+
 class App extends React.Component {
 
     state = {
@@ -62,37 +65,44 @@ class App extends React.Component {
         });
     }
 
-        searchMovie = (event) => { // Burada event parametresi ile inputtan gelen değeri alıyoruz.
-            this.setState({ // Burada searchQuery state'ini güncelliyoruz.
-                searchQuery: event.target.value // Burada inputtan gelen değeri alıyoruz.
-            })
-        }
-
-        render() {  //Yalnızca içeriğin gösterilmesi için kullanılmasını istiyoruz
-
-            let filteredMovies = this.state.movies.filter( // Burada movies array'ini filtreliyoruz.
-                (movie) => { // Burada movies array'ini map ediyoruz.
-                    return movie.name.toLowerCase().indexOf(this.state.searchQuery.toLowerCase()) !== -1; // Burada inputtan gelen değeri movies array'inde arıyoruz.
-                }
-            )
-
-            return (
-                <div className="container">
-                    <div className="row">
-                        <div className="col-lg-12">
-                            <SearchBar
-                                searchMovieProp={this.searchMovie} // Buradaki searchMovie fonksiyonunu props olarak gönderiyoruz searchbar'a.
-                            />
-                        </div>
-                    </div>
-                    <MovieList
-                        /* movies={this.state.movies} */ // Buradaki moviesleri props olarak gönderiyoruz movieliste.
-                        movies={filteredMovies}
-                        deleteMovieProp={this.deleteMovie} // Buradaki deleteMovie fonksiyonunu props olarak gönderiyoruz movieliste.
-                    />
-                </div>
-            );
-        }
+    searchMovie = (event) => { // Burada event parametresi ile inputtan gelen değeri alıyoruz.
+        this.setState({ // Burada searchQuery state'ini güncelliyoruz.
+            searchQuery: event.target.value // Burada inputtan gelen değeri alıyoruz.
+        })
     }
 
+    render() {  //Yalnızca içeriğin gösterilmesi için kullanılmasını istiyoruz
+
+        let filteredMovies = this.state.movies.filter( // Burada movies array'ini filtreliyoruz.
+            (movie) => { // Burada movies array'ini map ediyoruz.
+                return movie.name.toLowerCase().indexOf(this.state.searchQuery.toLowerCase()) !== -1; // Burada inputtan gelen değeri movies array'inde arıyoruz.
+            }
+        )
+
+        return (
+            <Router>
+                <div className="container">
+                    <Switch>
+                        <Route path="/" exact render={() => (
+                            <React.Fragment>
+                                <div className="row">
+                                    <div className="col-lg-12">
+                                        <SearchBar searchMovieProp={this.searchMovie} />
+                                    </div>
+                                </div>
+                                <MovieList
+                                    movies={filteredMovies}
+                                    deleteMovieProp={this.deleteMovie}
+                                />
+                            </React.Fragment>
+                        )}>
+                        </Route>
+                        <Route path="/add" component={AddMovie} />
+                    </Switch>
+                </div>
+            </Router>
+        )
+
+    }
+}
 export default App;

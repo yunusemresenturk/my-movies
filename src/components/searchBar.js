@@ -1,5 +1,4 @@
 import React from "react";
-
 class SearchBar extends React.Component {
 
     /* //SearchBara gelecek her yeni girdiyi update edecek state. 
@@ -9,25 +8,31 @@ class SearchBar extends React.Component {
 
     handleFormSubmit = (event) => {
         event.preventDefault(); // Burada form submit eventini engelliyoruz.
-        console.log(this.state.searchQuery); // Burada state'i console'a yazdırıyoruz.
-    }
+/*         console.log(this.state.searchQuery); // Burada state'i console'a yazdırıyoruz.
+ */    }
 
     render() {
-        return (
+        return  (
             <form onSubmit={this.handleFormSubmit}>
                 <div className="form-row mb-5">
-                    <div className="col-12">
+                    <div className="col-10">
                         <input 
-                        onChange={this.props.searchMovieProp} /* Burada onChange eventi ile her yeni girdiyi state'e update ediyoruz */
-                        type="text" className="form-control" 
-                        placeholder="Search a movie" 
-                       /*  value={this.state.searchQuery} */ /* Burada value ile state'i inputa bağlıyoruz. */
-                        /> .
+
+                            onChange={this.props.searchMovieProp} 
+                            type="text" className="form-control" 
+                            placeholder="Seach a movie" 
+                        />
+                    </div>
+                    <div className="col-2">
+                        <button type="button" 
+                                className="btn btn-md btn-danger"
+                                style={{float:'right'}}>Add Movie
+                        </button>
                     </div>
                 </div>
             </form>
         );
     }
-    }
+}
 
-    export default SearchBar;
+export default SearchBar;
