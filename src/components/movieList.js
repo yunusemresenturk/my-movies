@@ -10,9 +10,9 @@ const MovieList = (props) => { // Burada props olarak moviesleri alıyoruz.
     return (
         <div className="row">
 
-            {props.movies.map(movie => (      // Burada moviesleri map ediyoruz ve her bir movie için bir card oluşturuyoruz.
+            {props.movies.map((movie, i)=> (      // Burada moviesleri map ediyoruz ve her bir movie için bir card oluşturuyoruz.
 
-                <div className="col-lg-4" key={movie.id}>
+                <div className="col-lg-4" key={i}>  {/* Burada her bir movie için bir key oluşturuyoruz. */}
                     <div className="card mb-4 shadow-sm">
                         <img src={movie.image} className="card-img-top" alt="..." />
                         <div className="card-body">

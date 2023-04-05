@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 class SearchBar extends React.Component {
 
     /* //SearchBara gelecek her yeni girdiyi update edecek state. 
@@ -12,22 +13,24 @@ class SearchBar extends React.Component {
  */    }
 
     render() {
-        return  (
+        return (
             <form onSubmit={this.handleFormSubmit}>
-                <div className="form-row mb-5">
-                    <div className="col-10">
-                        <input 
+                <div className="input-group mb-3">
+                    <input
+                        type="text"
+                        name="searchQuery"
+                        className="form-control"
+                        placeholder="Search movies"
+                    />
+                    <div className="input-group-append">
 
-                            onChange={this.props.searchMovieProp} 
-                            type="text" className="form-control" 
-                            placeholder="Seach a movie" 
-                        />
-                    </div>
-                    <div className="col-2">
-                        <button type="button" 
-                                className="btn btn-md btn-danger"
-                                style={{float:'right'}}>Add Movie
-                        </button>
+                        <Link
+                            to="/add"
+                            type="button"
+                            className="btn btn-md btn-danger">
+                            Add Movie
+                        </Link>
+
                     </div>
                 </div>
             </form>

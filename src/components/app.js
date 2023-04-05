@@ -3,8 +3,7 @@ import SearchBar from './searchBar';
 import MovieList from './movieList';
 import axios from 'axios';
 import AddMovie from './addMovie';
-import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
-
+import { BrowserRouter as Router, Routes, Route, } from 'react-router-dom';
 class App extends React.Component {
 
     state = {
@@ -23,7 +22,7 @@ class App extends React.Component {
 
     async componentDidMount() {
         const response = await axios.get("http://localhost:3002/movies"); // Burada axios ile api'ye istek atıyoruz. axios asnc olarak bize network request döndürür.
-        console.log(response);
+        // console.log(response);
         this.setState({ movies: response.data }) // Burada movies state'ini güncelliyoruz.
     }
 
@@ -55,6 +54,7 @@ class App extends React.Component {
          });
      } */
 
+    //DDELETE MOVİE
     deleteMovie = async (movie) => { // Burada movie parametresi ile seçilen movie'yi alıyoruz.
         axios.delete(`http://localhost:3002/movies/${movie.id}`); // Burada axios ile api'ye istek atıyoruz. axios asnc olarak bize network request döndürür.
         const newMovieList = this.state.movies.filter( // Burada movies array'ini filtreliyoruz ve seçilen movie'yi çıkartıyoruz.
@@ -65,25 +65,36 @@ class App extends React.Component {
         });
     }
 
+    //SEARCH MOVİE
     searchMovie = (event) => { // Burada event parametresi ile inputtan gelen değeri alıyoruz.
         this.setState({ // Burada searchQuery state'ini güncelliyoruz.
             searchQuery: event.target.value // Burada inputtan gelen değeri alıyoruz.
         })
     }
 
+    //ADD MOVİE
+    addMovie = async (movie) => { // Burada movie parametresi ile yeni movie'yi alıyoruz.
+        await axios.post(`http://localhost:3002/movies/`, movie); // Burada axios ile api'ye istek atıyoruz. axios asnc olarak bize network request döndürür.
+        this.setState(state => ({ // Burada movies array'ini güncelliyoruz.
+            movies: state.movies.concat([movie]) // Burada movies array'ine yeni movie'yi ekliyoruz.
+        }));
+    }
+
     render() {  //Yalnızca içeriğin gösterilmesi için kullanılmasını istiyoruz
 
-        let filteredMovies = this.state.movies.filter( // Burada movies array'ini filtreliyoruz.
-            (movie) => { // Burada movies array'ini map ediyoruz.
-                return movie.name.toLowerCase().indexOf(this.state.searchQuery.toLowerCase()) !== -1; // Burada inputtan gelen değeri movies array'inde arıyoruz.
+        let filteredMovies = this.state.movies.filter(
+            (movie) => {
+                const movieName = movie.name || ''; // default to empty string if `movie.name` is undefined
+                const searchQuery = this.state.searchQuery || ''; // default to empty string if `this.state.searchQuery` is undefined
+                return movieName.toLowerCase().indexOf(searchQuery.toLowerCase()) !== -1;
             }
-        )
+        );
 
         return (
             <Router>
                 <div className="container">
-                    <Switch>
-                        <Route path="/" exact render={() => (
+                    <Routes>
+                        <Route path="/" exact element={
                             <React.Fragment>
                                 <div className="row">
                                     <div className="col-lg-12">
@@ -95,10 +106,24 @@ class App extends React.Component {
                                     deleteMovieProp={this.deleteMovie}
                                 />
                             </React.Fragment>
-                        )}>
+                        }>
                         </Route>
-                        <Route path="/add" component={AddMovie} />
-                    </Switch>
+
+
+                        <Route path="/add" exact element={(
+                            <AddMovie // Burada AddMovie component'ine onAddMovie prop'una addMovie fonksiyonunu tanımlıyoruz.
+
+                                onAddMovie={(newMovie) => { // Burada onAddMovie prop'una yeni bir fonksiyon tanımlıyoruz.
+                                    this.addMovie(newMovie) // Burada addMovie fonksiyonunu çağırıyoruz.
+                                }
+                                }
+
+                            />
+
+                        )} >
+                        </Route>
+
+                    </Routes>
                 </div>
             </Router>
         )
